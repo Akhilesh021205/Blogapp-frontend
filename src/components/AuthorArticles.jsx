@@ -43,7 +43,7 @@ function AuthorArticles() {
       setLoading(true);
 
       try {
-       const res = await axios.get("http://localhost:4000/author-api/articles", { withCredentials: true });
+       const res = await axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/author-api/articles`, { withCredentials: true });
 
         setArticles(res.data?.payload || []);
       } catch (err) {
@@ -64,7 +64,7 @@ function AuthorArticles() {
         isPremium: !article.isPremium
       };
       
-      await axios.put(`http://localhost:4000/author-api/articles/${article._id}`, updatedData, { withCredentials: true });
+      await axios.put(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/author-api/articles/${article._id}`, updatedData, { withCredentials: true });
       
       // Update local state
       setArticles(articles.map(art => 
@@ -87,7 +87,7 @@ function AuthorArticles() {
     }
 
     try {
-      await axios.patch(`http://localhost:4000/author-api/articles/${articleId}/status`, {
+      await axios.patch(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/author-api/articles/${articleId}/status`, {
         isArticleActive: !currentStatus
       }, { withCredentials: true });
       

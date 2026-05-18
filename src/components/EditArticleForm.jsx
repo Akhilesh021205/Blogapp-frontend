@@ -115,7 +115,7 @@ function EditArticle() {
       });
 
       const res = await axios.put(
-        `http://localhost:4000/author-api/articles/${article._id}`,
+        `${import.meta.env.VITE_API_URL || "http://localhost:4000"}/author-api/articles/${article._id}`,
         form,
         { 
           withCredentials: true,

@@ -85,7 +85,7 @@ function ArticleByID() {
     const getArticle = async () => {
       setLoading(true);
       try {
-        const res = await axios.get(`http://localhost:4000/user-api/article/${id}`, { withCredentials: true });
+        const res = await axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/user-api/article/${id}`, { withCredentials: true });
         setArticle(res.data.payload);
       } catch (err) {
         setError(err.response?.data?.error);
@@ -117,7 +117,7 @@ function ArticleByID() {
 
     setSubmittingComment(true);
     try {
-      const res = await axios.put(`http://localhost:4000/user-api/articles`, {
+      const res = await axios.put(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/user-api/articles`, {
         user: user._id || user.userId,
         articleId: id,
         comment: commentText
@@ -146,7 +146,7 @@ function ArticleByID() {
     if (!pendingCommentId) return;
     
     try {
-      const res = await axios.patch(`http://localhost:4000/user-api/articles/${id}/comments/${pendingCommentId}`, {}, { withCredentials: true });
+      const res = await axios.patch(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/user-api/articles/${id}/comments/${pendingCommentId}`, {}, { withCredentials: true });
       setArticle(res.data.payload);
       toast.success("Comment deleted");
     } catch (err) {
@@ -158,7 +158,7 @@ function ArticleByID() {
 
   const toggleArticleStatus = async (status) => {
     try {
-      const res = await axios.patch(`http://localhost:4000/author-api/articles/${id}/status`, { isArticleActive: status }, { withCredentials: true });
+      const res = await axios.patch(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/author-api/articles/${id}/status`, { isArticleActive: status }, { withCredentials: true });
       setArticle(res.data.payload);
       toast.success(status ? "Restored" : "Deleted");
     } catch (err) {
@@ -182,12 +182,12 @@ function ArticleByID() {
     try {
       let res;
       if (isReplacing) {
-        res = await axios.put(`http://localhost:4000/author-api/articles/${id}/images/${replaceIndex}`, formData, {
+        res = await axios.put(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/author-api/articles/${id}/images/${replaceIndex}`, formData, {
           headers: { "Content-Type": "multipart/form-data" },
           withCredentials: true
         });
       } else {
-        res = await axios.post(`http://localhost:4000/author-api/articles/${id}/images`, formData, {
+        res = await axios.post(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/author-api/articles/${id}/images`, formData, {
           headers: { "Content-Type": "multipart/form-data" },
           withCredentials: true
         });
@@ -209,7 +209,7 @@ function ArticleByID() {
     
     const deleteToast = toast.loading("Removing image...");
     try {
-      const res = await axios.delete(`http://localhost:4000/author-api/articles/${id}/images/${idx}`, { withCredentials: true });
+      const res = await axios.delete(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/author-api/articles/${id}/images/${idx}`, { withCredentials: true });
       setArticle(res.data.payload);
       toast.success("Image removed", { id: deleteToast });
     } catch (err) {

@@ -14,7 +14,7 @@ function SubscriptionModal({ isOpen, onClose, articleId }) {
     
     try {
       // 1. Record purchase in Database
-      await axios.post("http://localhost:4000/user-api/purchase", { articleId }, { withCredentials: true });
+      await axios.post(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/user-api/purchase`, { articleId }, { withCredentials: true });
       
       // 2. Update Local Store for instant UI reaction
       purchaseArticle(articleId);

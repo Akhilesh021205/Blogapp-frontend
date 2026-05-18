@@ -25,7 +25,7 @@ function ResetPassword() {
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      const res = await axios.post(`http://localhost:4000/common-api/reset-password/${token}`, {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/common-api/reset-password/${token}`, {
         password: data.password
       });
       toast.success(res.data.message);

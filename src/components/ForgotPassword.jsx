@@ -29,7 +29,7 @@ function ForgotPassword() {
     setLoading(true);
     try {
       // Direct Reset logic
-      const res = await axios.post("http://localhost:4000/common-api/direct-reset", data);
+      const res = await axios.post(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/common-api/direct-reset`, data);
       toast.success(res.data.message);
       setTimeout(() => navigate("/login"), 2000);
     } catch (err) {

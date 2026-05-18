@@ -42,8 +42,8 @@ function Register() {
 
     const endpoint =
       (newUser.role || "").toLowerCase() === "author"
-        ? "http://localhost:4000/author-api/users"
-        : "http://localhost:4000/user-api/users";
+        ? `${import.meta.env.VITE_API_URL || "http://localhost:4000"}/author-api/users`
+        : `${import.meta.env.VITE_API_URL || "http://localhost:4000"}/user-api/users`;
 
     try {
       const formData = new FormData();

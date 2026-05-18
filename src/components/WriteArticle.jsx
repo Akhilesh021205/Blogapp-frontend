@@ -126,7 +126,7 @@ function WriteArticle() {
       });
 
       await axios.post(
-        "http://localhost:4000/author-api/articles",
+        `${import.meta.env.VITE_API_URL || "http://localhost:4000"}/author-api/articles`,
         form,
         { 
           withCredentials: true,

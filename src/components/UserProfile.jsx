@@ -37,7 +37,7 @@ function UserProfile() {
     const getArticles = async () => {
       setLoading(true);
       try {
-        const res = await axios.get("http://localhost:4000/user-api/articles", {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/user-api/articles`, {
           withCredentials: true,
         });
 

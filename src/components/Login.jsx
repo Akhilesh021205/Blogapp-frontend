@@ -168,7 +168,7 @@ function Login() {
         {/* Google Login Button */}
         <button
           type="button"
-          onClick={() => window.location.href = "http://localhost:4000/auth/google"}
+          onClick={() => window.location.href = `${import.meta.env.VITE_API_URL || "http://localhost:4000"}/auth/google`}
           className="w-full h-11 flex items-center justify-center gap-3 bg-white hover:bg-slate-100 text-slate-900 font-semibold rounded-xl transition-all duration-300 shadow-lg shadow-white/5 active:scale-[0.98]"
         >
           <svg className="w-5 h-5" viewBox="0 0 24 24">

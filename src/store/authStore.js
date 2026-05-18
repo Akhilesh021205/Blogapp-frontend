@@ -20,7 +20,7 @@ export const useAuth = create(
 
         try {
           set({ loading: true, error: null });
-          let res = await axios.post("http://localhost:4000/common-api/login", userCredObj, { withCredentials: true });
+          let res = await axios.post(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/common-api/login`, userCredObj, { withCredentials: true });
           
           set({
             loading: false,
@@ -44,7 +44,7 @@ export const useAuth = create(
       logout: async () => {
         try {
           set({ loading: true, error: null });
-          await axios.get("http://localhost:4000/common-api/logout", { withCredentials: true });
+          await axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/common-api/logout`, { withCredentials: true });
           localStorage.removeItem("user_activity"); // Clear activity on logout
           set({
             loading: false,
@@ -64,7 +64,7 @@ export const useAuth = create(
 
       checkAuth: async () => {
         try {
-          const res = await axios.get("http://localhost:4000/common-api/check-auth", { withCredentials: true });
+          const res = await axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/common-api/check-auth`, { withCredentials: true });
 
           set({
             currentUser: res.data.payload,
@@ -90,7 +90,7 @@ export const useAuth = create(
       updateProfilePic: async (formData) => {
         try {
           set({ loading: true, error: null });
-          const res = await axios.put("http://localhost:4000/common-api/update-profile-pic", formData, {
+          const res = await axios.put(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/common-api/update-profile-pic`, formData, {
             withCredentials: true,
             headers: {
               "Content-Type": "multipart/form-data",

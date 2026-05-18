@@ -56,7 +56,7 @@ function Home() {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const res = await axios.get('http://localhost:4000/user-api/articles');
+        const res = await axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:4000"}/user-api/articles`);
         const allArticles = res.data?.payload;
         
         if (Array.isArray(allArticles)) {
